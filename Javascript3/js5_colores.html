@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <title>JS5 colores</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <input  id="entrada" type="password">
+        <br>
+        <button onclick="passwd()">Ver Passwd </button>
+        <br>
+        <div>
+            <p>Párrafo1</p>
+            <p>Párrafo2</p>
+            <p id="elegido">Párrafo3</p>
+            <p>Párrafo4</p>
+        </div>
+
+
+        <script>
+            
+            let contador = 0;
+            function passwd(){
+                
+                const colores =["yellow", "red", "green", "navy"];
+                const elemento=document.getElementById("entrada");
+                const listabotones=document.getElementsByTagName("button");
+                listabotones[0].style.color="white";
+
+                switch(elemento.type){
+                    case "text":
+                        elemento.type="password";
+                        listabotones[0].style.backgroundColor="green";
+                        break;
+
+                    case "password":
+                        elemento.type="text";
+                        listabotones[0].style.backgroundColor="red"
+                        break;
+                
+                    
+                }
+
+               let nuevo=document.createElement("h3");
+               nuevo.innerText="Hola, soy el nuevo";
+               let elegido=document.getElementById("elegido")
+               elegido.insertAdjacentElement("beforebegin", nuevo); //afterend
+               
+                nuevo.style.color=colores[contador];
+                ++contador;
+                if(contador>=4){
+                    contador=0;
+                }
+            }
+            
+        </script>
+    </body>
+</html>

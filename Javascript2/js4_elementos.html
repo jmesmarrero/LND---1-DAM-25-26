@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <title>JS4 Elementos</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+
+        <div>
+        <a>Vete por ahí</a>
+        </div>
+
+        <div>
+            <label for="primero">Primer número: </label>
+            <input id="primero" type="number">
+        </div>
+        <div>
+            <label class="miclase" for="segundo">Segundo número: </label>
+            <input id="segundo" type="number">
+        </div>
+
+        <h1 class="miclase" id="resultado"></h1>
+        <button onclick="mcd()">m.c.d.</button>
+
+
+     <script>
+            function mcd(){
+
+                let elementos=document.getElementsByTagName("label");
+                elementos[0].innerText="Esto está complicado";
+
+                let elementos=document.getElementsByClassName("miclase");
+                elementos[elementos.length-1].innerText="ya te digo";
+
+                let eldiv=document.querySelector("body>div:nth-of-type(1)")
+                eldiv.style.backgroundColor="lightyellow";
+
+                let elementos=document.getElementsByTagName("a");
+                elementos[0].href="http://lnd.angelmelchor.pro";
+
+
+
+                return;
+
+            }
+            
+            
+        </script>
+    </body>
+</html>

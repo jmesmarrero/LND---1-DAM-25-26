@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>JS Ejercicio fechas</title>
+        <meta charset="utf-8">
+        <Style>
+
+            div {
+                text-align: center;
+            }
+           
+        </style>
+    </head>
+    <body>
+
+        <div>
+        <label for="fecha">Fecha:</label>
+        <input id="fecha" type="date">
+        <br>
+        
+        <button onclick="dSemana()">Día Semana</button>
+        </div>
+        <div>
+            <h3 id="resultado"></h3>
+        </div>
+        <script>
+
+            let fecha = new Date()
+
+            function dSemana(){
+                const dias=["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sabado"];
+                const meses=["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+                const fecha=new Date(document.getElementById("fecha").value); //value= por ejemplo imput -> valores que no tienen texto
+                const salida="El día "+fecha.getDate()+" de "+meses[fecha.getMonth()]+" del año "+fecha.getFullYear()+" es "+dias[fecha.getDay()];
+                document.getElementById("resultado").innerText=salida;
+               
+            }
+
+        </script>
+    </body>
+</html>
+        

@@ -1,0 +1,220 @@
+<html>
+    <head>
+        <title>Calculadora</title>
+        <meta charset="utf-8">
+        <style>
+            body {
+                display:flex;
+                flex-direction:column;
+                align-items:center;
+            }
+            h1 {
+                color:navy;
+            }
+            #calculadora {
+                display:grid;
+                grid-template-columns: 3fr 1fr;
+                grid-template-rows: 25% auto;
+                border:3px solid navy;
+                width:25vw;
+                height:25vw;
+            }
+            #pantalla {
+                grid-column-start: span 2;
+                border:3px solid navy;
+                display:flex;
+                justify-content: center;
+                align-items:center;
+                background-color:gray;
+            }
+            #resultado {
+                border:2px solid green;
+                background-color:lightyellow;
+                width:70%;
+                text-align:right;
+                padding:0.5em;
+                font-weight:bold;
+                font-size:1.5em;
+                overflow:hidden;
+            }
+            #numbers {
+                display:grid;
+                grid-template-columns: auto auto auto;
+                grid-template-rows: 1fr 1fr 1fr 1fr;
+                gap:3px;
+                padding: 3px;
+                background-color:lightyellow;
+            }
+            #masmenos {
+                grid-column-start:1;
+                grid-row-start:4;
+            }
+            #operaciones {
+                display:grid;
+                grid-template-columns: auto auto;
+                border-left:6px solid green;
+                gap:3px;
+                padding:3px;
+                background-color:lightyellow;
+            }
+            #borrado {
+                grid-column-start:2;
+                grid-row-start:1;
+                grid-row-end:3;
+            }
+            #igual {
+                grid-column-start:2;
+                grid-row-start:3;
+                grid-row-end: 5;
+            }
+            #igual:hover {
+                background-color:lime;
+            }
+            #borrado:hover {
+                background-color:pink;
+            }
+            button {
+                border:2px solid red;
+            }
+            button {
+                font-size: 1.5em;
+            }
+            #operaciones > button {
+                font-weight:bold;
+                color:navy;
+            }
+            @media (max-width:1000px) and (orientation:portrait) {
+                #calculadora {
+                    width:90vw;
+                    height:auto;
+                    font-size:4em;
+                }
+                h1 {
+                    font-size:3em;
+                }
+            }
+            @media (max-width:1000px) and (orientation:landscape) {
+                #calculadora {
+                    width:90vw;
+                    height:auto;
+                }
+                #numbers {
+                    grid-template-columns: auto auto auto auto;
+                    grid-template-rows: 1fr 1fr 1fr;
+                }
+                #masmenos {
+                    grid-row-start:3;
+                }
+                h1 {
+                    display:none;
+                }
+            }
+        </style>
+    <script type="text/javascript" src="https://www3.gobiernodecanarias.org/educacion/cau_ce/estadisticasweb/scripts/piwik-eforma.js"></script><link rel="stylesheet" type="text/css" href="https://www3.gobiernodecanarias.org/educacion/cau_ce/estadisticasweb/scripts/cookies/cookies.css"/><script  type="text/javascript" src="https://www3.gobiernodecanarias.org/educacion/cau_ce/estadisticasweb/scripts/cookies/cookies.js"></script><script type="text/javascript" src="https://www3.gobiernodecanarias.org/educacion/cau_ce/estadisticasweb/scripts/cookies/cookies-html.js"></script></head>
+    <body>
+        <h1>Calculadora Básica</h1>
+        <div id="calculadora">
+            <div id="pantalla">
+                <p id="resultado">0.0</p>
+            </div>
+            <div id="numbers">
+                <button onclick="pulsa(1)">1</button>
+                <button onclick="pulsa(2)">2</button>
+                <button onclick="pulsa(3)">3</button>
+                <button onclick="pulsa(4)">4</button>
+                <button onclick="pulsa(5)">5</button>
+                <button onclick="pulsa(6)">6</button>
+                <button onclick="pulsa(7)">7</button>
+                <button onclick="pulsa(8)">8</button>
+                <button onclick="pulsa(9)">9</button>
+                <button id="cero" onclick="pulsa(0)">0</button>
+                <button id="masmenos" onclick="pulsa('masmenos')">+<br>-</button>
+                <button id="punto" onclick="pulsa('punto')">.</button>
+            </div>
+            <div id="operaciones">
+                <button onclick="operar('suma')">+</button>
+                <button onclick="operar('resta')">-</button>
+                <button onclick="operar('divide')">/</button>
+                <button onclick="operar('multiplica')">x</button>
+                <button id="igual" onclick="operar('calcula')">=</button>
+                <button id="borrado" onclick="operar('borra')">C</button>
+            </div>
+        </div>
+        <script>
+            let anterior="indefinido";
+            let operacion;
+            let nuevooperando=false;
+            function pulsa(valor){
+                let resultado=document.getElementById("resultado").innerText;
+                if (valor=='masmenos'){
+                    document.getElementById('resultado').innerText=resultado*(-1);
+                    return;
+                }
+                if (valor=='punto'){
+                    if (!resultado.includes('.')){
+                        document.getElementById('resultado').innerText=resultado+'.';
+                    }
+                    return;
+                }
+                /*Si la pantalla contiene literalmente:0.0 ó 0*/
+                if (resultado=="0.0" || resultado=="0" || nuevooperando){
+                    document.getElementById('resultado').innerText=valor;
+                    nuevooperando=false;
+                    return;
+                }
+                else {
+                    document.getElementById('resultado').innerText=resultado+valor;
+                    return;
+                }
+            }
+    
+            function operar(tipo){
+                let operando=document.getElementById("resultado").innerText;
+                if (tipo=="borra"){
+                    anterior="indefinido";
+                    document.getElementById("resultado").innerText="0.0";
+                    return;
+                }
+
+                if (anterior!="indefinido"){
+                    let resultado;
+                    switch (operacion) {
+                        case "suma":
+                            resultado=1*anterior+1*document.getElementById("resultado").innerText;
+                            document.getElementById('resultado').innerText=resultado;
+                            break;
+                        case "resta":
+                            resultado=1*anterior-1*document.getElementById("resultado").innerText;
+                            document.getElementById('resultado').innerText=resultado;
+                            break;
+                        case "multiplica":
+                            resultado=anterior*document.getElementById("resultado").innerText;
+                            document.getElementById('resultado').innerText=resultado;
+                            break;
+                        case "divide":
+                            resultado=anterior/document.getElementById("resultado").innerText;
+                            document.getElementById('resultado').innerText=resultado;
+                            break;
+                    }
+                    /*Para seguir operando sin pulsar =*/
+                    if (tipo=="calcula"){
+                        anterior="indefinido";
+                    }
+                    else {
+                        anterior=resultado;
+                        operacion=tipo;
+                    }
+                    nuevooperando=true;
+                    return;
+                }
+
+                if (anterior=="indefinido"){
+                    anterior=operando;
+                    operacion=tipo;
+                    document.getElementById("resultado").innerText=0.0;
+                    return;
+                }
+            }
+        </script>
+    </body>
+</html>
