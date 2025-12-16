@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <title>Lotería NAvidad</title>
+        <meta charset="utf-8">
+        <style>
+            body {
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                height:90vh;
+                background-color: #AABD06
+            }
+            div {
+                border:2px solid #68A105;
+                height:80%;
+                width:50%;
+                display:flex;
+                flex-direction:column;
+                justify-content:space-around;
+                align-items:center;
+                background-color: #E3E8B7
+            }
+            p {
+                margin:0;
+                border:3px solid green;
+                width:80%;
+                height:20%;
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                font-size:3em;
+                background-image: linear-gradient(to bottom,cyan,yellow);
+            }
+            button {
+                width:200px;
+                padding:20px;
+                font-size:1.5em;
+                background-color: #68A105;
+                font-weight:bold;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <button onclick="getnumber()">Good Luck!!!!</button>
+            <p id="resultado"></p>
+        </div>
+        <script>
+            function getnumber(){
+                const numero=Math.ceil(Math.random()*100000);
+                const elemento_p=document.getElementById("resultado");
+                elemento_p.innerText=numero;
+
+                /*if you want to beep without using a wave file*/
+                var context = new AudioContext();
+                var oscillator = context.createOscillator();
+                oscillator.type = "sine";
+                oscillator.frequency.value = 800;
+                oscillator.connect(context.destination);
+                oscillator.start(); 
+                // Beep for 500 milliseconds
+                setTimeout(function () {
+                    oscillator.stop();
+                }, 500); 
+
+            }
+        </script>
+    </body>
+</html>
