@@ -1,9 +1,9 @@
-# Exercices Markup Languages
+# Exercises Markup Languages
 
 1. Calculadora
 2. Dahsboard 
 
-# Exercices Javascript
+# Exercises Javascript
 
 1. Euclides
 2. Elementos
