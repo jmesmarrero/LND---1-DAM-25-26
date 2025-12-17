@@ -10,3 +10,4 @@
 3. Colores
 4. Fechas
 5. Lotería Navidad
+6. Bombilla
